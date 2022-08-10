@@ -92,3 +92,28 @@ Example :
 <img width="830" alt="Screenshot 2022-08-10 at 4 08 49 PM" src="https://user-images.githubusercontent.com/99721005/183881771-e823a233-ccb2-449f-a27d-ea535e8e58a5.png">
 
 
+In above diagram you can easily see :
+
+a.) Red block representing how commits form linked list. 
+
+b.) Green borders showing new root tree formed. New tree is formed if blob corresponding to it has changed. 
+
+c.) Blue arrow shows how directed acyclic graph is formed here.
+
+d.) Dashed orange lines show how git render the repository snapshot when pointed to a commit just by performing Depth First Search (DFS).
+
+4.) Tags : these are just pointers to a commit. So when we checkout to a tag, the git simply performs dfs from the commit to which the tag is pointing and renders the project structure.
+
+Directed Acyclic Graph (DAG) in GIT :
+
+
+1. In commit C1; 2 files b1 and b2 are committed with b2 in t2 directory.
+2. In commit C2; b1 is changed to b1' and new file b3 is added.
+3. In commit C3; a new file b4 is added in t2 directory which changed tree corresponding to t2 directory to t2'.
+4. In commit C4 file b1' is changed back to earlier implementation i.e. b1.
+
+Points to notice:
+1. With each commit we are getting new root tree.
+2. The blobs are created based on content, i.e. if blob corresponding to content of file exist; so tree will point to same blob; which happened in c4; t5 points to b1.
+3. You can see this is a complex graph but no where it forms cycle if we move in direction of edges.
+4. DAG cycle consist of commit, tree and blob or tree and blob only. Examples c1-t1-t2-t3-c2, t3-t2-b2-t2'-t4-b3, etc.
