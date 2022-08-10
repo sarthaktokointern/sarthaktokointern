@@ -2,7 +2,7 @@ Git Internal Architecture :
 
 Introduction : Git is a version control system. Most of the version control systems (vcs) use delta storage system that is storing incremental difference of each file in a commit with every increasing revision.
 
-![](../../../../../../../../var/folders/q3/tl6vmb3d7zv64nchn4lhn2th0000gn/T/TemporaryItems/NSIRD_screencaptureui_yVrBlg/Screenshot 2022-08-10 at 1.46.11 PM.png)
+<img width="786" alt="Screenshot 2022-08-10 at 3 27 40 PM" src="https://user-images.githubusercontent.com/99721005/183873484-c2060f00-0d7c-4c71-9367-daa67cd1640d.png">
 
 Disadvantage of using delta storage system :
 
@@ -44,9 +44,11 @@ h.) switch to 'objects' directory : cd objects
 
 you will see some output like this : 
 
-![](../../../../../../../../var/folders/q3/tl6vmb3d7zv64nchn4lhn2th0000gn/T/TemporaryItems/NSIRD_screencaptureui_TKJQVn/Screenshot 2022-08-10 at 2.27.52 PM.png)
+<img width="742" alt="Screenshot 2022-08-10 at 3 29 44 PM" src="https://user-images.githubusercontent.com/99721005/183873936-4b6ca7f9-c225-403f-86e3-164cae2001e3.png">
+
 
 Now if we will add some content to the file test.txt and add the changes to git then a new blob will get created corresponding to that.
 The file structure will be something like this :
 
-![](../../../../../../../../var/folders/q3/tl6vmb3d7zv64nchn4lhn2th0000gn/T/TemporaryItems/NSIRD_screencaptureui_rQtO6z/Screenshot 2022-08-10 at 2.29.52 PM.png)
+<img width="695" alt="Screenshot 2022-08-10 at 3 30 18 PM" src="https://user-images.githubusercontent.com/99721005/183874050-35afc101-abad-449c-b1ba-43b078cca41a.png">
+
