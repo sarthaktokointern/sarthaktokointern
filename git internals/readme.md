@@ -79,3 +79,13 @@ Simplified tree diagram :
 <img width="532" alt="Screenshot 2022-08-10 at 3 46 33 PM" src="https://user-images.githubusercontent.com/99721005/183877361-7c4ef4af-bc3c-4320-b5d8-33b4e2a0be3e.png">
 
 
+3.) Commit : it is an object in git, and it has 2 pointers
+
+a.) First pointer points to the root of the tree
+
+b.) Second pointer points to the previous commit object
+
+Note : the initial commit has only a single pointer pointing towards the root of the tree. It is also known as the head.
+
+Example :
+
