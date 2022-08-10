@@ -42,6 +42,8 @@ g.) list all the directories : ls -la
 
 h.) switch to 'objects' directory : cd objects
 
+i.) ls -la
+
 you will see some output like this : 
 
 <img width="742" alt="Screenshot 2022-08-10 at 3 29 44 PM" src="https://user-images.githubusercontent.com/99721005/183873936-4b6ca7f9-c225-403f-86e3-164cae2001e3.png">
@@ -51,4 +53,25 @@ Now if we will add some content to the file test.txt and add the changes to git 
 The file structure will be something like this :
 
 <img width="695" alt="Screenshot 2022-08-10 at 3 30 18 PM" src="https://user-images.githubusercontent.com/99721005/183874050-35afc101-abad-449c-b1ba-43b078cca41a.png">
+
+2.) Tree : if blob is a file, tree is a directory. 
+
+Hands on:
+
+a.) inside the directory test, create another directory : mkdir dir1
+
+b.) cd dir1
+
+c.) vim test.txt
+
+d.) add all the changes using 'git add .' from the test directory 
+
+Note : tree is created when the added changes are committed, but we can see the architecture of the tree which will get formed using the following command: git write-tree
+
+We will get the following architecture : 
+
+
+
+
+Simplified tree diagram :
 
