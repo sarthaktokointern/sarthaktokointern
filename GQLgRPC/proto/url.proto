@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "github.com/sarthak/GQLgRPC/grpc";
+
+service disecturl{
+  rpc url(urlpath) returns (disecturlpath){};
+}
+
+message urlpath{
+  string URL = 1;
+}
+
+message disecturlpath{
+  string scheme = 1;
+  string topleveldomain =2;
+  string secondleveldomain =3;
+}

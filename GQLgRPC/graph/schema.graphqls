@@ -1,0 +1,21 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+
+type Query {
+    url(input : urlpath) : disecturlpath
+    resturl(input : urlpath) : disecturlpath
+}
+
+input urlpath{
+  URL : String
+}
+
+type disecturlpath{
+  scheme : String
+  topleveldomain : String
+  secondleveldomain : String
+}
+
+
