@@ -70,8 +70,12 @@ Note : tree is created when the added changes are committed, but we can see the 
 
 We will get the following architecture : 
 
+<img width="693" alt="Screenshot 2022-08-10 at 3 46 12 PM" src="https://user-images.githubusercontent.com/99721005/183877293-fd5133da-eaf0-4952-ae42-da0e8bd18c18.png">
 
 
 
 Simplified tree diagram :
+
+<img width="532" alt="Screenshot 2022-08-10 at 3 46 33 PM" src="https://user-images.githubusercontent.com/99721005/183877361-7c4ef4af-bc3c-4320-b5d8-33b4e2a0be3e.png">
+
 
