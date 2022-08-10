@@ -106,6 +106,9 @@ d.) Dashed orange lines show how git render the repository snapshot when pointed
 
 Directed Acyclic Graph (DAG) in GIT :
 
+<img width="912" alt="Screenshot 2022-08-10 at 4 30 20 PM" src="https://user-images.githubusercontent.com/99721005/183885450-2b1c4a45-4598-4607-a8df-7af917d5ea94.png">
+
+
 
 1. In commit C1; 2 files b1 and b2 are committed with b2 in t2 directory.
 2. In commit C2; b1 is changed to b1' and new file b3 is added.
