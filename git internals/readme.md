@@ -89,3 +89,6 @@ Note : the initial commit has only a single pointer pointing towards the root of
 
 Example :
 
+<img width="830" alt="Screenshot 2022-08-10 at 4 08 49 PM" src="https://user-images.githubusercontent.com/99721005/183881771-e823a233-ccb2-449f-a27d-ea535e8e58a5.png">
+
+
