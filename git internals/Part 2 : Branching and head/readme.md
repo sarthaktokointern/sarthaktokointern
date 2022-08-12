@@ -53,11 +53,22 @@ Below is diagram to explain how HEAD changes with checkout and what is detached 
 
 1.) HEAD points to the master branch :
 
+<img width="567" alt="Screenshot 2022-08-12 at 1 28 12 PM" src="https://user-images.githubusercontent.com/99721005/184310933-fada1573-ce2a-47b1-a233-8b919d2c28f1.png">
+
 2.) Add a new commit C3 on master branch :
+
+<img width="503" alt="Screenshot 2022-08-12 at 1 28 35 PM" src="https://user-images.githubusercontent.com/99721005/184310997-3726e621-29b2-4989-82de-704df55724c5.png">
 
 3.) checkout to commit C2 :
 
+<img width="518" alt="Screenshot 2022-08-12 at 1 29 51 PM" src="https://user-images.githubusercontent.com/99721005/184311193-418c6aa6-cd7d-42e4-9799-289e86d0b1e2.png">
+
 4.) add a new commit C4 :
 
+<img width="520" alt="Screenshot 2022-08-12 at 1 30 05 PM" src="https://user-images.githubusercontent.com/99721005/184311243-923bc776-3750-42a7-9121-cec17217d9e4.png">
+
+
 5.) checkout a new branch from recent commit :
+
+<img width="513" alt="Screenshot 2022-08-12 at 1 30 21 PM" src="https://user-images.githubusercontent.com/99721005/184311272-85e85088-261f-46ea-a456-050550820524.png">
 
