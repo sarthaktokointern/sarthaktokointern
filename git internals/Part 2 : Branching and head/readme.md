@@ -33,3 +33,31 @@ Now let's take a hypothetical scenario for branching :
 
 <img width="661" alt="Screenshot 2022-08-12 at 11 18 47 AM" src="https://user-images.githubusercontent.com/99721005/184292566-0aa5da00-c902-4fc9-b096-48749ddc204b.png">
 
+2.) HEAD : is the current version of the code or pointer to the commit recently checked out.
+
+When we do checkout to a new branch the HEAD revision changes.
+
+run the following command :
+
+git checkout master
+cat .git/HEAD
+
+the following output will appear :
+
+
+the above filepath corresponds to the branch name to which HEAD is currently pointing and that branch further contains the commit id of the commit to which it is pointing.
+
+Note : In git, we can check out to a commit as well. In that case HEAD is called as detached HEAD. One can make changes and commit them as well but those changes won't reflect on any branch because they are not referenced. In order to make them referenced, one can check out a branch from that commit or simply tag that commit.
+
+Below is diagram to explain how HEAD changes with checkout and what is detached HEAD :
+
+1.) HEAD points to the master branch :
+
+2.) Add a new commit C3 on master branch :
+
+3.) checkout to commit C2 :
+
+4.) add a new commit C4 :
+
+5.) checkout a new branch from recent commit :
+
