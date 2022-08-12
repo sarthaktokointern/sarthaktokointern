@@ -1,4 +1,4 @@
-Git Internal Architecture :
+Git Internals Part 1 : Architecture and Objects
 
 Introduction : Git is a version control system. Most of the version control systems (vcs) use delta storage system that is storing incremental difference of each file in a commit with every increasing revision.
 
