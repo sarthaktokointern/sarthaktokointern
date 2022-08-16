@@ -6,6 +6,8 @@ So if you had erroneous merge while resolving conflict, and you get to know abou
 
 With rebase original commits are over-ridden with rebased commit and original commits are left dangling. So you tend to lose code information.
 
+<img width="770" alt="Screenshot 2022-08-16 at 3 54 04 PM" src="https://user-images.githubusercontent.com/99721005/184857415-c022abf0-a35b-415b-b8f3-d531d112c349.png">
+
 In above diagram [Diagram 1] the merge process creates a new merge commit C4 with branch start pointing to it. All merge conflict specific changes are part of C4 and your original commit C2 remains untouched.
 While in rebase the C2 commit is left dangling and a new commit C2' is created. If there is a merge conflict when rebasing new_branch C2' commit will hold them and C2 being dangling commit will be destroyed when garbage collection runs.
 
@@ -20,6 +22,9 @@ Streamlined and Clean Commit History :
 If one wants to achieve a streamlined and clean git history, then rebase is the way to go.
 
 
+<img width="842" alt="Screenshot 2022-08-16 at 3 54 45 PM" src="https://user-images.githubusercontent.com/99721005/184857532-fae4d17b-e42e-4ee0-95fd-485315f12441.png">
+
+
 
 The above diagram [Diagram 2] show 2 developers (Dev1 and Dev2) checking out their branch from C1 commit and adding C2 and C5 commit respectively. Commit C3 is added in master branch.
 
@@ -31,6 +36,8 @@ Now when Dev2 merge his branch and a new commit C9 is created as commit history 
 You can easily point out with only 3 merges the history looks too much diverged and converged. Also commit history forms DAG (Directed Acyclic Graph); so if you have to perform any operation on commit history you have to use graph algorithms.
 
 Lets us now see how it will work in rebase
+
+<img width="756" alt="Screenshot 2022-08-16 at 3 55 02 PM" src="https://user-images.githubusercontent.com/99721005/184857572-03de7424-d5c2-4e9c-946e-7db81403566a.png">
 
 
 As the name says rebase always re-establishes the base when there is diversion in commit history. You can see that a new commit is created for C2, C5 and C8 and these commits are discarded and destroyed during garbage collection process. For C7 since diversion was not there during rebase so branch just fast-forwarded to C7.
