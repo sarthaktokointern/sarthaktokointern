@@ -8,8 +8,12 @@ b.) Find the fork point or the point from where branches are getting diverged
 
 c.) After finding the fork point it reapplies each commit present in the target branch after fork commit create new commits. For reapplying commits, it uses commit patch.
 
-The below diagram shows how rebase is done : 
+The below diagram shows how rebase is done :
 
+<img width="707" alt="Screenshot 2022-08-16 at 10 58 44 AM" src="https://user-images.githubusercontent.com/99721005/184804496-9d4544e5-693c-4703-9510-f8dd67cd46ad.png">
+ 
+
+<img width="692" alt="Screenshot 2022-08-16 at 10 59 08 AM" src="https://user-images.githubusercontent.com/99721005/184804539-8610a8b1-2bf4-482c-beb3-52a9a9a9a832.png">
 
 
 We can see that before rebase 2 branches master and new_branch diverged from C2 commit. So C2 commit is the base commit or the common ancestor point between these 2 branches. When we do rebase; the process checkout to target branch that is master and starts applying commit which are present in new_branch after fork point i.e. C2.
