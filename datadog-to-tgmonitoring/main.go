@@ -1,15 +1,17 @@
 package main
 
 import (
-	"context"
+	_ "context"
 	"flag"
-	"fmt"
+	_ "fmt"
 	"io"
+	"os"
+	"path/filepath"
 	"strconv"
 
 	"log"
-	"os"
-	"path/filepath"
+	_ "os"
+	_ "path/filepath"
 	"strings"
 	"text/template"
 )
@@ -21,99 +23,41 @@ import (
 const IntMin = -2147483647
 
 func main() {
+	tgmPolicyName := flag.String("tgm-policy-name", "gql-alerts", "TG-Monitoring policy name")
+	tgmPolicyRelativePath := flag.String("tgm-policy-relative-path", "../../../../policies/v0.35.13/gql-alerts", "TG-Monitoring policy relative path")
+	list := []string{"accounts", "accountsapp", "ace", "acemisc", "Affiliate", "appsflyer", "bankingvcc", "Banner", "bms", "brandstore", "broadcasterreport", "byme", "campaign", "cartapp", "category", "categorytx", "cm", "contactus", "content", "creditapplication", "creditcard", "crosssell", "discussion", "donationcpg", "donationorder", "dynamicpdp", "egold", "event", "eventapp", "feeds", "filtron", "flights", "followership", "ftgenie", "fux", "galadriel", "gamenurturing", "gamification", "gamificationengine", "giftcard", "goal", "goldmerchant", "goods", "hades", "hoth", "hotlist", "ims", "inbox", "insight", "insuretech", "kai", "kero", "keroaddr", "kyc", "lending", "localservicescatalog", "localservicesmedia", "localservicestransaction", "mcl", "membership", "merchantvoucher", "mitraapp", "mojito", "mplogistic", "mutualfund", "myorders", "notifapp", "notifier", "notify", "oauth", "ocr", "ongkirappapi", "ongkirappenvoy", "openapi", "orderapp", "oshome", "osmicrosite", "osseller", "otp", "partnerapp", "partnerintapp", "payment", "pdp", "pdpongkirapp", "play", "productreview", "promo", "promosuggestion", "promotioncampaign", "purchaseprotect", "questengine", "r3", "recharge", "reputation", "resolution", "richie", "rolloutmanager", "salamexpquran", "salamreview", "saldo", "saldomitra", "saldoprioritas", "salesforce", "sauron", "sellerdashboard", "sellerinfo", "sellersearch", "seocms", "shipping", "shoppage", "tempo", "tokopoints", "tokoshop", "tome", "tomepdp", "topads", "topbot", "topchat", "travel", "travelcollective", "travelflightdiscovery", "travelhoteldiscovery", "travelhotelfulfillment", "travelhotelpostsales", "travelseo", "traveltraindiscovery", "trigger", "umrahcatalog", "umrahtx", "universesearch", "uploadpedia", "userapp", "vcc", "videosearch", "vision", "vod", "wallet", "walletoauth", "warehouse", "wishlist"}
 
-	tgmPolicyName := flag.String("tgm-policy-name", "", "TG-Monitoring policy name")
-	tgmPolicyRelativePath := flag.String("tgm-policy-relative-path", "", "TG-Monitoring policy relative path")
-	//monitor id of datadog monitor
-	MonitorId := flag.Int("monitor-id", IntMin, "Monitor Id of datadog monitor")
-	isEnable := flag.Bool("is-enable", false, "State of the datadog monitor (Muted/Not Muted)")
-	/*set the nrql query, example of nrql query: from metric select count(test_key.summary) where env = 'production'
-	for more info on nrql, go through the following doc: https://docs.newrelic.com/docs/query-your-data/nrql-new-relic-query-language/get-started/nrql-syntax-clauses-functions/
-	*/
-	query := flag.String("new-relic-query", "", "new relic alert query")
-	WarningThreshold := flag.Int("warning-threshold", IntMin, "warning threshold of the alert")
-
-	flag.Parse()
-
-	if *tgmPolicyName == "" {
-		log.Fatalln("ERROR: tgm-policy-name is not set or empty")
-	}
-	if *tgmPolicyRelativePath == "" {
-		log.Fatalln("ERROR: tgm-policy-relative-path is not set or empty")
-	}
-	if *MonitorId == IntMin {
-		log.Fatalln("ERROR: monitor id is not set")
-	}
-
-	if *query == "" {
-		log.Fatalln("new relic alert query not set or empty")
-	}
-
-	if *WarningThreshold == IntMin {
-		log.Fatalf("warning threshold not set")
-	}
-
-	ctx := datadog.NewDefaultContext(context.Background())
-	configuration := datadog.NewConfiguration()
-	apiClient := datadog.NewAPIClient(configuration)
-
-	resp, _, err := apiClient.MonitorsApi.GetMonitor(ctx, int64(*MonitorId), *datadog.NewGetMonitorOptionalParameters())
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MonitorsApi.GetMonitor`: %v\n", err)
-
-	}
-
-	dirname := *resp.Name
-
-	AlertDuration := getAlertDuration(resp.Query)
-
-	if AlertDuration == 0 {
-		log.Fatalf("could not gather duration info from the data dog query")
-	}
-
-	AlertOp := getAlertOp(resp.Query)
-
-	if AlertOp == "" {
-		log.Fatalf("could not gather alert operation from the data dog query")
-	}
-
-	AlertThreshold := getAlertThreshold(resp.Query, AlertOp)
-
-	templ, _ := template.ParseFiles("tgMonitoringFileTemplate.tmpl")
-
-	log.Printf("INFO: creating directory %s", dirname)
-	err = os.MkdirAll(dirname, 0755)
-
-	if err != nil {
-		log.Fatalf("ERROR: failed in creating directory")
-	}
-
-	println("directory created!!")
-	func() {
-		f, err := os.Create(filepath.Join(dirname, "terragrunt.hcl"))
-		if err != nil {
-			log.Fatalf("ERROR: failed in creating tg monitoring file under %s for monitor id=%d name=%s: %v", dirname, *resp.Id, *resp.Name, err)
-		}
-		defer f.Close()
-		alertschema := map[string]string{
-			"Op":             AlertOp,
-			"threshCritical": strconv.Itoa(AlertThreshold),
-			"dur":            strconv.Itoa(AlertDuration),
-			"isEnable":       strconv.FormatBool(*isEnable),
-			"query":          *query,
-			"threshWarning":  strconv.Itoa(*WarningThreshold),
-		}
-		err = renderTGMonitoringFile(*tgmPolicyName, *tgmPolicyRelativePath, &resp, alertschema, templ, f)
+	for _, val := range list {
+		dirname := "/Users/sarthaksrivastava-mbp/go/src/github.com/tokopedia/tg-monitoring/new-relic/monitors/directorate/tech-graphql/conditions/v0.35.13"
+		templ, _ := template.ParseFiles("tgMonitoringFileTemplate.tmpl")
+		dirname = dirname + "/" + val + "/" + "RPS"
+		log.Printf("INFO: creating directory %s", dirname)
+		err := os.MkdirAll(dirname, 0755)
 
 		if err != nil {
-			log.Fatalln("ERROR: unable to render tg monitoring file:", err)
+			log.Fatalf("ERROR: failed in creating directory")
 		}
-		log.Println("INFO: done creating", f.Name())
+		name := "[GQL][Potential]" + "[" + val + "]" + "Upstream Traffic below threshold"
 
-	}()
+		func() {
+			f, _ := os.Create(filepath.Join(dirname, "terragrunt.hcl"))
 
-	log.Printf("INFO: tg-monitoring file for condition belonging to monitorID=%d has been created in directory %s", *resp.Id, dirname)
-	log.Println("-------:)-------")
+			defer f.Close()
+
+			templ.Execute(f, map[string]interface{}{
+				"TGMonitoringAlertPolicyName":         tgmPolicyName,
+				"TGMonitoringAlertPolicyRelativePath": tgmPolicyRelativePath,
+				"AlertCondition":                      name,
+				"service":                             strings.ToLower(val),
+			})
+
+			log.Println("INFO: done creating", f.Name())
+
+		}()
+
+		log.Println("-------:)-------")
+
+	}
 
 }
 
