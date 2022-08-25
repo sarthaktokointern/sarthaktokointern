@@ -1,0 +1,30 @@
+Single Responsibility : This is the first solid principle, and it states that each and every object should be given a single responsibility only.
+
+For instance ->
+
+The below-mentioned code represents various functions that can be performed by a bot
+
+(b *bot) func Navigate (input1){
+    //input1 represents slice of image objects where each object corresponds to an image taken by the onboard camera. This helps the bot to get familiar with its surroundings and navigate accordingly
+}
+
+(b *bot) func CurrentPos() Vec3{
+    //it returns the current position of the bot in terms of a vector
+}
+
+(b* bot) func Speed(input1) int {
+    //input1 represents slice of image objects where each object corresponds to an image taken by the onboard camera. Changes the speed of the bot as per the surroundings and returns the current speed
+
+}
+
+(b *bot) func IdentifyObjects (input1) []string{
+    ////input1 represents slice of image objects where each object corresponds to an image taken by the onboard camera. This func identifies each and every image and returns them in a slice of strings
+}
+
+In the above example, the b object of type bot doesn't hold a single responsibility. It holds 2 responsibilities ->
+
+a.) Movement
+b.) Identification
+
+In order to make the above code fulfill the single resp principle we should refactor the code in such a way : Make 2 separate objects for Movement and Identification respectively
+

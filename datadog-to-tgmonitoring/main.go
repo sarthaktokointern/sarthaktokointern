@@ -4,11 +4,13 @@ import (
 	_ "context"
 	"flag"
 	_ "fmt"
+	"github.com/newrelic/newrelic-client-go/pkg/alerts"
 	"io"
 	"os"
 	"path/filepath"
 	"strconv"
 
+	"github.com/newrelic/newrelic-client-go/newrelic"
 	"log"
 	_ "os"
 	_ "path/filepath"
@@ -26,7 +28,21 @@ func main() {
 	tgmPolicyName := flag.String("tgm-policy-name", "gql-alerts", "TG-Monitoring policy name")
 	tgmPolicyRelativePath := flag.String("tgm-policy-relative-path", "../../../../policies/v0.35.13/gql-alerts", "TG-Monitoring policy relative path")
 	list := []string{"accounts", "accountsapp", "ace", "acemisc", "Affiliate", "appsflyer", "bankingvcc", "Banner", "bms", "brandstore", "broadcasterreport", "byme", "campaign", "cartapp", "category", "categorytx", "cm", "contactus", "content", "creditapplication", "creditcard", "crosssell", "discussion", "donationcpg", "donationorder", "dynamicpdp", "egold", "event", "eventapp", "feeds", "filtron", "flights", "followership", "ftgenie", "fux", "galadriel", "gamenurturing", "gamification", "gamificationengine", "giftcard", "goal", "goldmerchant", "goods", "hades", "hoth", "hotlist", "ims", "inbox", "insight", "insuretech", "kai", "kero", "keroaddr", "kyc", "lending", "localservicescatalog", "localservicesmedia", "localservicestransaction", "mcl", "membership", "merchantvoucher", "mitraapp", "mojito", "mplogistic", "mutualfund", "myorders", "notifapp", "notifier", "notify", "oauth", "ocr", "ongkirappapi", "ongkirappenvoy", "openapi", "orderapp", "oshome", "osmicrosite", "osseller", "otp", "partnerapp", "partnerintapp", "payment", "pdp", "pdpongkirapp", "play", "productreview", "promo", "promosuggestion", "promotioncampaign", "purchaseprotect", "questengine", "r3", "recharge", "reputation", "resolution", "richie", "rolloutmanager", "salamexpquran", "salamreview", "saldo", "saldomitra", "saldoprioritas", "salesforce", "sauron", "sellerdashboard", "sellerinfo", "sellersearch", "seocms", "shipping", "shoppage", "tempo", "tokopoints", "tokoshop", "tome", "tomepdp", "topads", "topbot", "topchat", "travel", "travelcollective", "travelflightdiscovery", "travelhoteldiscovery", "travelhotelfulfillment", "travelhotelpostsales", "travelseo", "traveltraindiscovery", "trigger", "umrahcatalog", "umrahtx", "universesearch", "uploadpedia", "userapp", "vcc", "videosearch", "vision", "vod", "wallet", "walletoauth", "warehouse", "wishlist"}
+	apiKey := flag.String("api-key", "NRAK-G4CYB1X0K5OKPSVN21ZSD7ISH52", "New Relic personal API key")
+	accountID := flag.Int("account-id", 3046194, "(Optional) New Relic (sub)account ID")
+	policyID := flag.Int("policy-id", 3463493, "New Relic alert policy ID")
+	client, err := newrelic.New(newrelic.ConfigPersonalAPIKey(*apiKey))
+	if err != nil {
+		log.Fatalln("ERROR: failed in creating newrelic client:", err)
+	}
+	conditions, err := client.Alerts.SearchNrqlConditionsQuery(*accountID, alerts.NrqlConditionsSearchCriteria{PolicyID: strconv.Itoa(*policyID), QueryLike: "SELECT rate(sum(gql_per_service_call_rate), 1 SECONDS) FROM Metric WHERE"})
+	for _, c := range conditions {
+		id, _ := strconv.Atoi(c.ID)
 
+		con, _ := client.Alerts.DeleteCondition(id)
+		log.Printf("the following condition with name %s, has been deleted", con.Name)
+	}
+	os.Exit(1)
 	for _, val := range list {
 		dirname := "/Users/sarthaksrivastava-mbp/go/src/github.com/tokopedia/tg-monitoring/new-relic/monitors/directorate/tech-graphql/conditions/v0.35.13"
 		templ, _ := template.ParseFiles("tgMonitoringFileTemplate.tmpl")
