@@ -1,0 +1,41 @@
+Liskov Substitution -> If, for each object, O1 of type S there is an object O2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when O1 is substituted for O2, then S is a subtype of T.
+
+Basically this principle can be executed with the help of interfaces ->
+
+package main
+
+type adder interface {
+	add() int
+}
+
+type operation1 struct {
+	a int
+	b int
+}
+
+func (o operation1) add() int {
+	return o.b + o.a
+}
+
+type operation2 struct {
+	a int
+	b int
+}
+
+func (o operation2) add() int {
+	return o.a + o.b
+}
+
+func main() {
+	operations := []adder{operation1{
+		a: 10,
+		b: 20,
+	}, operation2{
+		a: 30,
+		b: 30,
+	}}
+	for _, op := range operations {
+		println(op.add())
+	}
+
+}

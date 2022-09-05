@@ -1,0 +1,100 @@
+Open/Closed -> open for extension and closed for modification
+
+-> you should be able to extend the functionality of the system without modifying the system
+
+for instance ->
+
+import (
+	"net/http"
+
+	"github.com/ahmetb/go-linq"
+	"github.com/gin-gonic/gin"
+)
+
+type PermissionChecker struct {
+	//
+	// some fields
+	//
+}
+
+func (c *PermissionChecker) HasPermission(ctx *gin.Context, name string) bool {
+	var permissions []string
+	switch ctx.GetString("authType") {
+	case "jwt":
+		permissions = c.extractPermissionsFromJwt(ctx.Request.Header)
+	case "basic":
+		permissions = c.getPermissionsForBasicAuth(ctx.Request.Header)
+	case "applicationKey":
+		permissions = c.getPermissionsForApplicationKey(ctx.Query("applicationKey"))
+	}
+
+	var result []string
+	linq.From(permissions).
+		Where(func(permission interface{}) bool {
+			return permission.(string) == name
+		}).ToSlice(&result)
+
+	return len(result) > 0
+}
+
+func (c *PermissionChecker) getPermissionsForApplicationKey(key string) []string {
+	var result []string
+	//
+	// extract JWT from the request header
+	//
+	return result
+}
+
+func (c *PermissionChecker) getPermissionsForBasicAuth(h http.Header) []string {
+	var result []string
+	//
+	// extract JWT from the request header
+	//
+	return result
+}
+
+func (c *PermissionChecker) extractPermissionsFromJwt(h http.Header) []string {
+	var result []string
+	//
+	// extract JWT from the request header
+	//
+	return result
+}
+
+In the above code, we are basically extracting the set of permissions from the request header on the basis of type of user authorisation the web app is using.
+Suppose if we want to extend the functionality of this code to extract permissions from the request header on the basis of another type of user authentication, then we will have to
+modify our primary function i.e. HasPermission. THis is not feasible as this can cause the entire system to fail if something goes wrong in the newly embedded flow.
+
+Hence, the below-mentioned implementation should be used as this will eliminate the above-mentioned harm and one can easily extend the functionality of the system without modifying it.
+
+type PermissionProvider interface {
+	Type() string
+	GetPermissions(ctx *gin.Context) []string
+}
+
+type PermissionChecker struct {
+	providers []PermissionProvider
+	//
+	// some fields
+	//
+}
+
+func (c *PermissionChecker) HasPermission(ctx *gin.Context, name string) bool {
+	var permissions []string
+	for _, provider := range c.providers {
+		if ctx.GetString("authType") != provider.Type() {
+			continue
+		}
+
+		permissions = provider.GetPermissions(ctx)
+		break
+	}
+
+	var result []string
+	linq.From(permissions).
+		Where(func(permission interface{}) bool {
+			return permission.(string) == name
+		}).ToSlice(&result)
+
+	return len(result) > 0
+}
