@@ -24,3 +24,6 @@ b.) Data and Analytics: Offer business intelligence and data warehouse in the cl
 5.) Management tools which deliver services through which customers can interact and manage their deployments and cloud infra
 
 Note: We have security and devops that cut across the stack because they are not specific to a layer, they are important for all the services 
+
+
+<img width="655" alt="Screenshot 2022-09-08 at 4 31 03 PM" src="https://user-images.githubusercontent.com/99721005/189105970-3671e50a-a7f0-4b80-b527-4014058fe5b7.png">
