@@ -1,0 +1,2 @@
+components of an app ->
+
