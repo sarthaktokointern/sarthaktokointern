@@ -5,4 +5,4 @@ Process :-
 -> it is an instance of a running program
 -> it provides environment for the program to execute
 
-![](../../../../../../../../../../var/folders/q3/tl6vmb3d7zv64nchn4lhn2th0000gn/T/TemporaryItems/NSIRD_screencaptureui_rpz6ey/Screenshot 2022-10-10 at 5.06.37 PM.png)
+<img width="611" alt="Screenshot 2022-10-11 at 10 32 12 AM" src="https://user-images.githubusercontent.com/99721005/195001193-c5b3bf8e-130c-4533-90b4-d40e54f4f52f.png">
