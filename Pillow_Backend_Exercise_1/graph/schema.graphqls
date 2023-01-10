@@ -1,0 +1,26 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+    RequestCounter : RequestData
+}
+
+
+type RequestData{
+  Data : data
+  Extensions : extensions
+}
+
+type data{
+  NumberOfRequests :Int
+}
+
+type extensions{
+  Status : Int
+  Message : String
+  X_Wait_Till : Int
+  X_Rate_Limit : Int
+}
+
+
