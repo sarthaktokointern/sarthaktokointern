@@ -121,7 +121,7 @@ func UpdateSQLDataBase() {
 func fetchYouTubeVideos(service *youtube.Service, input *model.QueryConfig) {
 
 	//Calling the Search API of YouTube
-	APICall := service.Search.List(cfg.Parameters).Q(*input.Query).Order("date")
+	APICall := service.Search.List(cfg.Parameters).Q(*input.Query).Order("date").Type("video")
 
 	response, err := APICall.Do()
 
