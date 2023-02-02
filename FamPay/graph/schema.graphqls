@@ -1,0 +1,20 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+  SearchOnYouTube(input: QueryConfig): [YouTubeResults!]!
+}
+
+input QueryConfig{
+  query: String
+}
+
+type YouTubeResults{
+  VideoTitle: String
+  VideoDescription: String
+  DateOfPublishing: String
+  ThumbnailURL: String
+}
+
+
