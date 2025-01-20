@@ -1,0 +1,121 @@
+{
+  "name": "Sarthak Srivastava",
+  "contact": {
+    "phone": "+91‑9310884172",
+    "email": "sarthaksrishtiss18@gmail.com"
+  },
+  "education": [
+    {
+      "institution": "Maharaja Surajmal Institute of Technology",
+      "degree": "Btech in Computer Science and Engineering",
+      "date": "AUG 2022",
+      "location": "New Delhi, India",
+      "cgpa": "9.45/10"
+    }
+  ],
+  "links": {
+    "GitHub": "sarthaktokointern",
+    "LinkedIn": "sarthak-srivastava-02ab0b19b",
+    "LeetCode": "sarthak744"
+  },
+  "skills": [
+    "C/C++",
+    "GoLang",
+    "VS Code",
+    "NewRelic Query Language",
+    "NewRelic",
+    "Grafana",
+    "DataDog",
+    "GraphQL",
+    "API Development",
+    "Jenkins Deployment",
+    "Github",
+    "Postman",
+    "Jira",
+    "Flask",
+    "MongoDB",
+    "Python",
+    "Automation",
+    "Azure",
+    "AWS",
+    "Gerrit",
+    "Pycharm",
+    "Docker",
+    "Testing and Debugging"
+  ],
+  "experience": [
+    {
+      "title": "Member of Technical Staff 1",
+      "company": "Nutanix",
+      "date": "May 2023 – Present",
+      "location": "Bangalore, India",
+      "responsibilities": [
+        {
+          "title": "FVN and FNS Automation",
+          "description": [
+            "Executed a comprehensive custom environment setup, which included creating VPCs, subnets (NAT/No-NAT), VMs etc through automation, aligning with the test plan for both FVN and FNS.",
+            "Implemented verification for FVN, ensuring the proper addition of ERPs to the Route Table.",
+            "Successfully automated all P0s and P1s workflows for FVN, enhancing the robustness of our testing framework."
+          ],
+          "businessImpact": "Significantly strengthened our testing framework, leading to improved efficiency and reliability."
+        },
+        {
+          "title": "NC2 Azure Cleanup",
+          "description": [
+            "Identified and deleted stale, orphaned, and unused resources in the Azure testing subscription, reducing unnecessary costs.",
+            "Developed an automation script to fetch, analyze, and delete stale Azure public IPs based on specific criteria."
+          ],
+          "businessImpact": "Notably reduced our Azure bill, demonstrating a commitment to cost efficiency."
+        },
+        {
+          "title": "Automation, Testing and Debugging Tasks",
+          "description": [
+            "Automated critical processes such as Adding Host status verification for add, remove and condemn node operation, NC2Z: Adding host APIs for Nutanix Cluster Service, Poll MCM after cluster termination or successful terminate, Automation: Add new verification post cluster creation verifying multiple dns entries, Adding Allocated Resources API to Nutanix Cluster Service, Migration of condemn, GetHost, ListHosts APIs to a host.py etc.",
+            "Successfully debugged issues such as missing Op logs for specific operations.",
+            "Conducted thorough testing, including Private Region Testing, to ensure the reliability of our systems."
+          ],
+          "businessImpact": "Enhanced the overall robustness of our testing framework and contributed to the seamless functioning of various domains."
+        }
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Tokopedia",
+      "date": "FTE: Jul’22 – Nov’22, Intern: Feb’22 ‑ Jun’22",
+      "location": "New Delhi, India",
+      "responsibilities": [
+        "Added in-house antibot check layer at the handler level in gqlserver.",
+        "Implemented GraphQL Query Complexity Analysis (static+dynamic) for letting the developers know beforehand the expected response size, time complexity, number of resolvers and nesting depth of their graphql queries."
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Facebook Hackercup",
+      "description": "Rank in Qualification Round: Global Rank 1936 out of 30000+ participants"
+    },
+    {
+      "title": "Google Code Jam",
+      "description": "Qualified for Round 1 with 41 points in the Qualification Round"
+    }
+  ],
+  "publication": {
+    "title": "Path Finding Algorithms",
+    "description": "Book Chapter of Emerging Technologies in Data Mining and Information Security | Springer"
+  },
+  "codingProfiles": [
+    "Have Solved 1000+ problems on Interviewbit, LeetCode, CodeChef and AtCoder all combined"
+  ],
+  "projects": [
+    {
+      "title": "TubeTrove",
+      "description": "Made an API to fetch latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response.",
+      "techStack": ["GraphQL", "GoLang", "MySQL"]
+    },
+    {
+      "title": "SpeedGate",
+      "description": "Considering a single node environment where the server is deployed, I made an API which when called returns the number of requests made till now and rate limits any requests after X requests with 60 seconds. It returns a 429 HTTP error response when the user hits the rate limit X. The response header contains the X-WAIT-TILL (time when the next API request to succeed) and X-RATE-LIMIT (the rate limit X enforced) details.",
+      "techStack": ["GraphQL", "GoLang"]
+    }
+  ]
+}
